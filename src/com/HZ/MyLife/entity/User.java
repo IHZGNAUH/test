@@ -2,20 +2,21 @@ package com.HZ.MyLife.entity;
 
 import java.util.Date;
 
-/**用户类
+/**
+ * 用户类
  * Created by xsjdn on 2019/12/6.
  */
 public class User {
-    private String uid;
+    private String userId;
     private String username;
     private String password;
     private String telephone;
     private String email;
-    private String name;
-    private String sex;
-    private Date birthday;
-    private String state;
+    //激活状态
+    private int state;
+    //激活码
     private String code;
+    private int roleId;
 
     public User() {
     }
@@ -23,14 +24,6 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
-    }
-
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
     }
 
     public String getUsername() {
@@ -65,36 +58,20 @@ public class User {
         this.email = email;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getState() {
+    public int getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(int state) {
         this.state = state;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getCode() {
@@ -103,5 +80,13 @@ public class User {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 }
