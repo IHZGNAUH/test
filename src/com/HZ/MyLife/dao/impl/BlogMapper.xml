@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.HZ.MyLife.dao.BlogDao">
+    <sql id="allCols">
+        blogId,
+        blogName,
+        blogContent,
+        postUser,
+        createTime,
+        likeNumber,
+        commentNumber,
+        cid
+    </sql>
+    <select id="pageFindBlog" parameterType="object" resultType="Blog">
+        SELECT <include refid="allCols"></include> FROM blog
+        <where>
+            <if test="param1!=null">
+                cid=#{param1}
+            </if>
+        </where>
+        <if test="param2!=null">
+            limit #{param2},#{param3}
+        </if>
+    </select>
+    <select id="pageBlogByUser" parameterType="object" resultType="Blog">
+        SELECT <include refid="allCols"></include> FROM blog
+        <where>
+            <if test="param1!=null">
+                postUser=#{param1}
+            </if>
+        </where>
+        <if test="param2!=null">
+            limit #{param2},#{param3}
+        </if>
+    </select>
+    <select id="countBlogByCid" parameterType="string" resultType="int">
+        SELECT COUNT(blogId) from blog WHERE cid=#{cid}
+    </select>
+    <select id="countBlogByUser" parameterType="string" resultType="int">
+        SELECT COUNT(blogId) from blog WHERE postUser=#{name}
+    </select>
+    <insert id="addBlog" parameterType="Blog">
+        INSERT INTO blog(<include refid="allCols"/>) VALUES (
+        #{blogId},
+        #{blogName},
+        #{blogContent},
+        #{postUser},
+        #{createTime},
+        #{likeNumber},
+        #{commentNumber},
+        #{cid}
+        )
+    </insert>
+</mapper>

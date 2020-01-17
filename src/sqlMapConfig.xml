@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- 指定数据库配置文件-->
+    <properties resource="db.properties"/>
+
+    <settings>
+        <!-- MyBatis默认是开启SqlSessionFactory的二级缓存的 -->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+
+    <!--为引用的类或接口设置别名-->
+    <typeAliases>
+        <typeAlias type="com.HZ.MyLife.entity.User" alias="User"/>
+        <typeAlias type="com.HZ.MyLife.entity.Blog" alias="Blog"/>
+        <typeAlias type="com.HZ.MyLife.entity.Category" alias="Category"/>
+    </typeAliases>
+
+    <!-- 配置当前工程所需要的MyBatis环境变量 -->
+    <environments default="development">
+        <environment id="development">
+            <!-- 事务: 数据库的一系列操作叫作"数据库事务",事务中的CRUD操作要么都执行,要么都不执行-"原子性" 
+	   		    此处事务不是"自动提交的", 虽然对查询来说是提高效率的,但是增删改均要自己写事务的提交!!
+	   		-->
+            <transactionManager type="JDBC"/>
+
+            <!-- 配置数据源(MyBatis自带"MyBatis会话连接池"),暂时不配置,后续在SSM中再行配置 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="${DRIVER}"/>
+                <property name="url" value="${MYSQL_URL}"/>
+                <property name="username" value="${USER}"/>
+                <property name="password" value="${PASS}"/>
+            </dataSource>
+
+        </environment>
+    </environments>
+
+    <!-- 注册ORM映射文件 -->
+    <mappers>
+        <!-- XML映射-->
+        <mapper resource="com/HZ/MyLife/dao/impl/UserMapper.xml"/>
+        <mapper resource="com/HZ/MyLife/dao/impl/BlogMapper.xml"/>
+        <mapper resource="com/HZ/MyLife/dao/impl/CategoryMapper.xml"/>
+    </mappers>
+
+</configuration>

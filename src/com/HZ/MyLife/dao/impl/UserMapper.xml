@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.HZ.MyLife.dao.UserDao">
+    <sql id="allCols">
+        userId,
+        username,
+        password,
+        telephone,
+        email,
+        state,
+        code,
+        roleId
+    </sql>
+    <select id="findByName" parameterType="string" resultType="User">
+        SELECT * FROM USER WHERE username=#{username} ;
+    </select>
+    <insert id="addUser" parameterType="User">
+        INSERT INTO USER(<include refid="allCols"/>) VALUES (
+        #{userId},
+        #{username},
+        #{password},
+        #{telephone},
+        #{email},
+        #{state},
+        #{code},
+        #{roleId}
+        )
+    </insert>
+    <update id="updateState" parameterType="string">
+        UPDATE user SET state=1,code=null WHERE code=#{code}
+    </update>
+</mapper>
